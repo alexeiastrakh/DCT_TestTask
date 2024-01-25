@@ -12,4 +12,3 @@ It will be a plus if the program implements additional functions
 - [x] Light/Dark theme
 - [ ] Multiple localisations
 
-Also use Data Binding,Command Pattern,Dependency Injection (DI)
