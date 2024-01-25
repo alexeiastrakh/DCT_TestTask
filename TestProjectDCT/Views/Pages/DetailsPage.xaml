@@ -1,0 +1,69 @@
+﻿<Page x:Class="TestProjectDCT.DetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:oxy="http://oxyplot.org/wpf"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestProjectDCT" d:DataContext="{d:DesignInstance Type=local:DetailsViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="475"
+      Title="CryptoDetails" Style="{StaticResource PageStyle}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Find crypto:" FontSize="17" FontFamily="Comic Sans MS" Margin="0,5,5,0"/>
+            <ComboBox Height="25" Width="200"
+                      IsTextSearchEnabled="True"
+                      IsReadOnly="False"
+                      IsEditable="True"
+                      ItemsSource="{Binding Cryptos}"
+                      SelectedItem="{Binding SelectedCrypto}"
+                      DisplayMemberPath="Name"/>
+        </WrapPanel>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="8" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Price:" FontSize="17" FontFamily="Comic Sans MS"/>
+                <TextBlock FontSize="17" FontFamily="Comic Sans MS" Width="300">
+                <Run Text="{Binding SelectedCrypto.PriceUsd}" />
+                </TextBlock>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Volume:" FontSize="17" FontFamily="Comic Sans MS"/>
+                <TextBlock FontSize="17" x:Name="volume" FontFamily="Comic Sans MS" Width="300" Text="{Binding SelectedCrypto.VolumeUsd24Hr}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Price Change (24hr):" FontSize="17" FontFamily="Comic Sans MS"/>
+                <TextBlock FontSize="17" x:Name="change" FontFamily="Comic Sans MS" Width="300" Text="{Binding SelectedCrypto.ChangePercent24Hr}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Supply:" FontSize="17" FontFamily="Comic Sans MS"/>
+                <TextBlock FontSize="17" FontFamily="Comic Sans MS" Width="300" Text="{Binding SelectedCrypto.Supply}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Symbol:" FontSize="17" FontFamily="Comic Sans MS"/>
+                <TextBlock FontSize="17" FontFamily="Comic Sans MS" Width="300" Text="{Binding SelectedCrypto.Symbol}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Link to site: " FontSize="17" FontFamily="Comic Sans MS"/>
+                <TextBlock><Hyperlink NavigateUri="{Binding SelectedCrypto.Explorer}" RequestNavigate="Hyperlink_RequestNavigate"><Run FontSize="17" FontFamily="Comic Sans MS" Text="{Binding SelectedCrypto.Explorer}"/></Hyperlink></TextBlock>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Page>

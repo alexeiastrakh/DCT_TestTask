@@ -1,0 +1,62 @@
+﻿<!-- ConvertPage.xaml -->
+<Page x:Class="TestProjectDCT.ConvertPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:TestProjectDCT" d:DataContext="{d:DesignInstance Type=local:ConvertViewModel}"
+      mc:Ignorable="d"
+      d:DesignHeight="400" d:DesignWidth="475"
+      Title="Convert Page" Style="{StaticResource PageStyle}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="275"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- List of Cryptocurrencies -->
+        <ListBox Grid.Column="0" ItemsSource="{Binding AllCryptos}"
+                 SelectedItem="{Binding FromCrypto}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock FontSize="18" Text="{Binding Path=Name}" FontFamily="Comic Sans MS"/>
+                        <TextBlock Text="{Binding Path=Id}" FontFamily="Comic Sans MS"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Conversion Inputs -->
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock FontSize="18" Text="Convert Crypto" FontFamily="Comic Sans MS" Margin="0,0,0,10"/>
+
+            <TextBlock FontSize="16" Text="From:" FontFamily="Comic Sans MS"/>
+            <ComboBox Height="25" Width="150"
+                      ItemsSource="{Binding AllCryptos}"
+                      SelectedItem="{Binding FromCrypto}"
+                      DisplayMemberPath="Name"/>
+
+            <TextBlock FontSize="16" Text="To:" Margin="0,10,0,0" FontFamily="Comic Sans MS"/>
+            <ComboBox Height="25" Width="150"
+                      ItemsSource="{Binding AllCryptos}"
+                      SelectedItem="{Binding ToCrypto}"
+                      DisplayMemberPath="Name" Margin="0,0,0,10"/>
+
+            <TextBlock FontSize="16" Text="Amount:" Margin="0,10,0,0" FontFamily="Comic Sans MS"/>
+            <TextBox Height="25" Width="150" Text="{Binding Amount}" Margin="0,0,0,10"/>
+
+            <Button Content="Convert" Command="{Binding ConvertCommand}" Height="25" Width="80" Margin="0,10,0,0"/>
+        </StackPanel>
+
+        <!-- Result -->
+        <StackPanel Grid.Column="2" Margin="10">
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <TextBlock FontSize="18" Text="Result:" Margin="0,0,5,0" FontFamily="Comic Sans MS"/>
+                <TextBlock FontSize="18" Text="{Binding Result}" Foreground="Green" FontFamily="Comic Sans MS"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
